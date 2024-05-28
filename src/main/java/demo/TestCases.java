@@ -9,39 +9,37 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-
 public class TestCases {
     ChromeDriver driver;
-    public TestCases()
-    {
+
+    // Constructor to initialize the WebDriver and setup ChromeDriver
+    public TestCases() {
         System.out.println("Constructor: TestCases");
         WebDriverManager.chromedriver().timeout(30).setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
 
-    public void endTest()
-    {
+    // Method to close the WebDriver and quit the browser
+    public void endTest() {
         System.out.println("End Test: TestCases");
         driver.close();
         driver.quit();
-
     }
 
-    
-    public  void testCase01(){
+    // Method to open a Google form
+    public void testCase01() {
         System.out.println("Start Test case: testCase01");
         driver.get("https://forms.gle/wjPkzeSEk1CM7KgGA");
         System.out.println("end Test case: testCase01");
     }
 
-    public void testCase02() throws InterruptedException{
-
+    // Method to fill in the name in the form
+    public void testCase02() throws InterruptedException {
         System.out.println("Start Test case: testCase02");
         Thread.sleep(2000);
         WebElement inputName = driver.findElement(By.xpath("//div[@id='i1']/ancestor::div[3]//input[@type='text']"));
@@ -50,17 +48,19 @@ public class TestCases {
         System.out.println("end Test case: testCase02");
     }
 
-    public void testCase03() throws InterruptedException{
+    // Method to fill in a reason for practicing automation
+    public void testCase03() throws InterruptedException {
         System.out.println("Start Test case: testCase03");
         WebElement whyPracticeAutomation = driver.findElement(By.xpath("//div[@id='i5']/ancestor::div[3]//textarea"));
-        long epoch = System.currentTimeMillis()/1000;
+        long epoch = System.currentTimeMillis() / 1000;
         Thread.sleep(2000);
-        whyPracticeAutomation.sendKeys("I want to be the best QA Engineer! "+epoch);
+        whyPracticeAutomation.sendKeys("I want to be the best QA Engineer! " + epoch);
         Thread.sleep(2000);
         System.out.println("end Test case: testCase03");
     }
 
-    public void testCase04() throws InterruptedException{
+    // Method to select experience level via radio button
+    public void testCase04() throws InterruptedException {
         System.out.println("Start Test case: testCase04");
         WebElement experienceRadio = driver.findElement(By.xpath("//div[@role='radiogroup']//label//child::div[@id='i13']"));
         experienceRadio.click();
@@ -68,19 +68,21 @@ public class TestCases {
         System.out.println("end Test case: testCase04");
     }
 
-    public void testCase05(){
+    // Method to select Java, Selenium, and TestNG checkboxes
+    public void testCase05() {
         System.out.println("Start Test case: testCase05");
         WebElement javaCheckbox = driver.findElement(By.xpath("//span[text()='Java']/ancestor::div/../div[@id='i30']"));
         WebElement seleniumCheckbox = driver.findElement(By.xpath("//span[text()='Selenium']/ancestor::div/../div[@id='i33']"));
-        WebElement testNGChekbox = driver.findElement(By.xpath("//div[@role='listitem']//child::div[@id='i39']/following::div[2]/span[text()='TestNG']"));
+        WebElement testNGCheckbox = driver.findElement(By.xpath("//div[@role='listitem']//child::div[@id='i39']/following::div[2]/span[text()='TestNG']"));
 
         javaCheckbox.click();
         seleniumCheckbox.click();
-        testNGChekbox.click();
+        testNGCheckbox.click();
         System.out.println("end Test case: testCase05");
     }
 
-    public void testCase06() throws InterruptedException{
+    // Method to select a title from a dropdown
+    public void testCase06() throws InterruptedException {
         System.out.println("Start Test case: testCase06");
         WebElement dropDoWebElement = driver.findElement(By.xpath("//div[@role='listbox']"));
         dropDoWebElement.click();
@@ -89,20 +91,22 @@ public class TestCases {
         System.out.println("end Test case: testCase06");
     }
 
-    public void testCase07() throws InterruptedException{
+    // Method to enter a date in the form
+    public void testCase07() throws InterruptedException {
         System.out.println("Start Test case: testCase07");
-            LocalDate currentDate = LocalDate.now();
-            LocalDate dateSevenDaysAgo = currentDate.minusDays(7);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            String formattedDate = dateSevenDaysAgo.format(formatter);
+        LocalDate currentDate = LocalDate.now();
+        LocalDate dateSevenDaysAgo = currentDate.minusDays(7);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDate = dateSevenDaysAgo.format(formatter);
 
-            WebElement dateField = driver.findElement(By.xpath("//input[@type='date']"));
-            dateField.sendKeys(formattedDate);
-            Thread.sleep(3000);
-            System.out.println("end Test case: testCase07");
+        WebElement dateField = driver.findElement(By.xpath("//input[@type='date']"));
+        dateField.sendKeys(formattedDate);
+        Thread.sleep(3000);
+        System.out.println("end Test case: testCase07");
     }
 
-    public void testCase08() throws InterruptedException{
+    // Method to enter the current time in the form
+    public void testCase08() throws InterruptedException {
         System.out.println("Start Test case: testCase08");
         LocalTime currentTime = LocalTime.now();
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -111,33 +115,26 @@ public class TestCases {
         String hour = timeParts[0];
         String minute = timeParts[1];
 
-        WebElement hourFiled = driver.findElement(By.xpath("//div[contains(text(),'Time')]/..//child::input[@type='text']"));
-        WebElement minFiled = driver.findElement(By.xpath("(//div[contains(text(),'Time')]/..//following::input[@type='text'])[2]"));
+        WebElement hourField = driver.findElement(By.xpath("//div[contains(text(),'Time')]/..//child::input[@type='text']"));
+        WebElement minField = driver.findElement(By.xpath("(//div[contains(text(),'Time')]/..//following::input[@type='text'])[2]"));
 
-        hourFiled.sendKeys(hour);
+        hourField.sendKeys(hour);
         Thread.sleep(3000);
-        minFiled.sendKeys(minute);
+        minField.sendKeys(minute);
         Thread.sleep(3000);
         System.out.println("end Test case: testCase08");
     }
 
-    // public void testCase09() throws InterruptedException{
-    //     System.out.println("Start Test case: testCase09");
-    //     Thread.sleep(4000);
-    //     driver.get("https://www.amazon.in/");
-    //     Thread.sleep(4000);
-
-    //     System.out.println("end Test case: testCase09");
-    // }
-
-    public void testCase10() throws InterruptedException{
+    // Method to submit the form
+    public void testCase10() throws InterruptedException {
         System.out.println("Start Test case: testCase10");
         WebElement submitBtn = driver.findElement(By.xpath("//span[text()='Submit']"));
         submitBtn.click();
         System.out.println("end Test case: testCase10");
     }
 
-    public void testCase11() throws InterruptedException{
+    // Method to verify and print the 'Thanks' message after form submission
+    public void testCase11() throws InterruptedException {
         System.out.println("Start Test case: testCase11");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement thnxMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Thanks')]")));
@@ -145,5 +142,4 @@ public class TestCases {
         System.out.println(msgString);
         System.out.println("end Test case: testCase11");
     }
-
 }
